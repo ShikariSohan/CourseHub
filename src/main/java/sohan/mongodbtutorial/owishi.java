@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Sohan
  */
-@WebServlet("/Sohan")
-public class Sohan extends HttpServlet {
+@WebServlet("/owishi")
+public class owishi extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Sohan() {
+    public owishi() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +29,7 @@ public class Sohan extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("productadd.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -40,10 +40,9 @@ public class Sohan extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("username");
         String password = request.getParameter("password");
-        System.out.println(name+"   -- " + password);
-        String url = "/coursehub/owishi";
-        response.sendRedirect(url);
 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("productadd.jsp");
+        dispatcher.forward(request, response);
     }
 
 }

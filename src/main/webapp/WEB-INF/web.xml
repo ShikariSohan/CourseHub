@@ -10,11 +10,12 @@
         <param-value>27017</param-value>
     </context-param>
     <welcome-file-list>
-        <welcome-file>productlist.jsp</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+
 </web-app>
