@@ -1,4 +1,5 @@
 package sohan.mongodbtutorial.converter;
+
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -13,6 +14,10 @@ public class UserConverter {
         doc.append("password", u.getPassword());
         doc.append("role", u.getRole());
         doc.append("email", u.getEmail());
+        doc.append("username", u.getUsername());
+        doc.append("dept", u.getDept());
+        doc.append("isValid", u.getValid());
+
         if (u.getId() != null) {
             doc.append("_id", new ObjectId(u.getId()));
         }
@@ -25,6 +30,11 @@ public class UserConverter {
         u.setEmail((String) doc.get("email"));
         u.setPassword((String) doc.get("password"));
         u.setRole((String) doc.get("role"));
+        u.setDept((String) doc.get("dept"));
+        u.setUsername((String) doc.get("username"));
+        u.setValid((Boolean) doc.get("isValid"));
+
+
         u.setId(((ObjectId) doc.get("_id")).toString());
         return u;
     }

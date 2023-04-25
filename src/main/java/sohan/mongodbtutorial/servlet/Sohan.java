@@ -1,4 +1,4 @@
-package sohan.mongodbtutorial;
+package sohan.mongodbtutorial.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class register
+ * Servlet implementation class Sohan
  */
-@WebServlet("/register")
-public class register extends HttpServlet {
+@WebServlet("/Sohan")
+public class Sohan extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public register() {
+    public Sohan() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,7 +40,7 @@ public class register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("username");
         String password = request.getParameter("password");
-        System.out.println(name+"   -- " + password);
+        System.out.println(name + "   -- " + password);
         String url = "/coursehub/owishi";
         response.sendRedirect(url);
 

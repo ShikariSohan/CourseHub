@@ -11,10 +11,21 @@
 <div class="min-h-screen flex items-center justify-center">
   <div class="max-w-md w-full bg-white shadow-lg rounded-lg p-8">
     <h1 class="text-2xl font-bold mb-6">Login</h1>
+
     <form action="/coursehub/login" method="post">
       <div class="mb-4">
+      <%
+      String error = request.getParameter("error");
+      System.out.println("drddrdtgdtgddr");
+      if (error != null && error.equals("1")) {
+      %>
+          <p class="text-rose-400">Invalid username or password</p>
+      <%
+      }
+      %>
+
         <label for="email" class="block text-gray-700 font-bold mb-2">Username</label>
-        <input type="email" name="username" id="email" class="w-full border border-gray-300 p-2 rounded-lg" required>
+        <input name="username" id="email" class="w-full border border-gray-300 p-2 rounded-lg" required>
       </div>
       <div class="mb-6">
         <label for="password" class="block text-gray-700 font-bold mb-2">Password</label>

@@ -1,4 +1,4 @@
-package sohan.mongodbtutorial;
+package sohan.mongodbtutorial.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,18 +9,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class register
- */
-@WebServlet("/login")
-public class Login extends HttpServlet {
+@WebServlet("/logout")
+public class Logout extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Logout() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +27,9 @@ public class Login extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -38,10 +38,11 @@ public class Login extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("username");
-        String password = request.getParameter("password");
-        System.out.println(name+"   -- " + password);
-        String url = "/coursehub/owishi";
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        String url = "/coursehub";
         response.sendRedirect(url);
 
     }

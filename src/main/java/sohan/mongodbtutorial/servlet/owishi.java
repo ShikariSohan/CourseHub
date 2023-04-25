@@ -1,4 +1,4 @@
-package sohan.mongodbtutorial;
+package sohan.mongodbtutorial.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Sohan
@@ -29,7 +30,15 @@ public class owishi extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("productadd.jsp");
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            System.out.println(session.getAttribute("id"));
+            System.out.println(session.getAttribute("role"));
+        } else {
+            System.out.println("Noooooooooo");
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -41,7 +50,7 @@ public class owishi extends HttpServlet {
         String name = request.getParameter("username");
         String password = request.getParameter("password");
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("productadd.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);
     }
 

@@ -20,7 +20,7 @@ public class ProductDao {
     private MongoCollection<Document> coll;
  
     public ProductDao(MongoClient mongo) {
-        this.coll = mongo.getDatabase("mongodbtutorial").getCollection("product");
+        this.coll = mongo.getDatabase("coursehub").getCollection("product");
     }
  
     public Product create(Product p) {
