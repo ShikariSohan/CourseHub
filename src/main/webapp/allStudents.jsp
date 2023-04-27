@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="sohan.mongodbtutorial.model.Course"%>
+<%@page import="sohan.mongodbtutorial.model.User"%>
 <%@page import="sohan.mongodbtutorial.utils.StringArrays"%>
 <%@page import="java.util.List" %>
 <!DOCTYPE html>
