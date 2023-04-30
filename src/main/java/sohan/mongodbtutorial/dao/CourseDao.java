@@ -48,10 +48,10 @@ public class CourseDao {
         return courses;
     }
 
-    public List<Course> getAllCourse() {
+    public List<Course> getAllCourse(boolean isArchived) {
         List<Course> courses = new ArrayList<>();
         HashMap<String, String> teacherMap = getMappedTeacher();
-        FindIterable<Document> iterable = coll.find();
+        FindIterable<Document> iterable = coll.find(Filters.eq("isArchived", isArchived));
         for (Document doc : iterable) {
             String teacherId = doc.getObjectId("teacher").toString();
             String teacherName = teacherMap.getOrDefault(teacherId, "Unknown");
@@ -74,6 +74,23 @@ public class CourseDao {
 
     public int getCourseCount() {
         return (int) coll.countDocuments();
+    }
+
+    public int getRunningCourseCount() {
+        return (int) coll.countDocuments(Filters.eq("isArchived", false));
+    }
+
+    public void archiveACourse(String id) {
+        ObjectId objectId;
+        try {
+            objectId = new ObjectId(id);
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+        Document filter = new Document("_id", objectId);
+        Document update = new Document("$set", new Document("isArchived", true));
+        this.coll.updateOne(filter, update);
+
     }
 
 

@@ -47,14 +47,20 @@ public class Dashboard extends HttpServlet {
                 List<User> teachers = userDao.getRecentUser("teacher");
                 List<User> students = userDao.getRecentUser("student");
                 List<Course> courses = courseDao.getRecentCourses();
+                int totalStudents = userDao.getUserCount("student");
+                int totalTeachers = userDao.getUserCount("teacher");
                 int totalCourses = courseDao.getCourseCount();
+                int runningCourses = courseDao.getRunningCourseCount();
                 request.setAttribute("teachers", teachers);
                 request.setAttribute("students", students);
                 request.setAttribute("courses", courses);
                 request.setAttribute("totalCourses", totalCourses);
+                request.setAttribute("totalStudents", totalStudents);
+                request.setAttribute("totalTeachers", totalTeachers);
+                request.setAttribute("runningCourses", runningCourses);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("adminDashboard.jsp");
                 dispatcher.forward(request, response);
-                
+
             } else if (role.equals("teacher")) {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("teacherDashboard.jsp");
                 dispatcher.forward(request, response);

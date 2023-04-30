@@ -1,5 +1,6 @@
 package sohan.mongodbtutorial.servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -47,11 +48,28 @@ public class owishi extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("username");
-        String password = request.getParameter("password");
+        BufferedReader reader = request.getReader();
+        String line = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        while ((line = reader.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+        String requestBody = stringBuilder.toString();
+        System.out.println(requestBody);
+        // Process the request and generate a response
+        String responseData = "Response data";
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-        dispatcher.forward(request, response);
+        // Set the content type of the response
+        response.setContentType("text/plain");
+
+        // Get a PrintWriter object from the response
+        PrintWriter out = response.getWriter();
+
+        // Write the response data to the output stream
+        out.println(responseData);
+
+        // Close the PrintWriter
+        out.close();
     }
 
 }

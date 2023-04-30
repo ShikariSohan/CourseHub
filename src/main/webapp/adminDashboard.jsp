@@ -23,19 +23,19 @@
             <!-- Total Students -->
             <div class="bg-white shadow rounded-lg p-6">
                 <div class="text-gray-500 text-sm uppercase mb-2">Total Students</div>
-                <div class="text-3xl font-bold">1,000</div>
+                <div class="text-3xl font-bold"><%= request.getAttribute("totalStudents") %></div>
             </div>
 
             <!-- Total Teachers -->
             <div class="bg-white shadow rounded-lg p-6">
                 <div class="text-gray-500 text-sm uppercase mb-2">Total Teachers</div>
-                <div class="text-3xl font-bold">100</div>
+                <div class="text-3xl font-bold"><%= request.getAttribute("totalTeachers") %></div>
             </div>
 
             <!-- Running Courses -->
             <div class="bg-white shadow rounded-lg p-6">
                 <div class="text-gray-500 text-sm uppercase mb-2">Running Courses</div>
-                <div class="text-3xl font-bold">50</div>
+                <div class="text-3xl font-bold"><%= request.getAttribute("runningCourses") %></div>
             </div>
 
             <!-- Total Courses -->

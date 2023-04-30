@@ -7,6 +7,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Current Courses</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <style>
@@ -54,7 +55,7 @@
                                 <p class="text-gray-600"><%= course.getName() %></p>
                                 <p class="mt-2 text-sm font-medium text-gray-500">Teacher: <%= course.getTeacher() %></p>
                                 <div class="mt-4 flex justify-end">
-                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" style="background-color: #9e0031;" onclick="openModal('<%= course.getCourseCode()%>')">Archive</button>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" style="background-color: #9e0031;" onclick="openModal('<%= course.getId()%>')">Archive</button>
                                 </div>
                             </div>
                     </div>
@@ -72,7 +73,7 @@
                             <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                     <div class="sm:flex sm:items-start">
-                                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-rose-100 sm:mx-0 sm:h-10 sm:w-10">
                                             <!-- Add your icon here -->
                                         </div>
                                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
@@ -110,6 +111,18 @@
                 function ArchiveCode() {
                     console.log({code});
                     document.getElementById("myModal").classList.add("hidden");
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', '/coursehub/currentcourses', true);
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                            location.reload(true);
+                        }
+                    };
+
+                    xhr.send(code);
+
+
                 }
 
                 function closeModal() {

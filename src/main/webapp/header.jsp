@@ -22,7 +22,7 @@
 <nav id="header" class="w-full top-0 text-white" style="background-color: #9e0031;">
     <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
         <div class="pl-4 flex items-center">
-            <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
+            <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="/coursehub/dashboard">
                 <svg class="h-12 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
                     <image href="./book.svg" x="0" y="0" width="100%" height="100%" />
                 </svg>
@@ -37,13 +37,14 @@
                     </a>
                 </li>
             </ul>
-            <button
-                    onclick="location.href='/coursehub/logout'"
-                    id="navAction"
-                    class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-            >
-                Logout
-            </button>
+            <form action="/coursehub/logout" method="post">
+                <button
+                        id="navAction"
+                        class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+                >
+                   Logout
+                </button>
+            </form>
         </div>
     </div>
     <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />

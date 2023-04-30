@@ -91,6 +91,10 @@ public class UserDao {
         return studentList;
     }
 
+    public int getUserCount(String role) {
+        return (int) coll.countDocuments(Filters.eq("role", role));
+    }
+
     public List<User> getRecentUser(String role) {
         List<User> userList = new ArrayList<>();
         FindIterable<Document> iterable = coll.find(Filters.eq("role", role)).sort(Sorts.descending("_id")).limit(2);

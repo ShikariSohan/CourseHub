@@ -6,6 +6,7 @@ import sohan.mongodbtutorial.dao.UserDao;
 import sohan.mongodbtutorial.model.Course;
 import sohan.mongodbtutorial.model.User;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -48,7 +49,7 @@ public class CurrentCourses extends HttpServlet {
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
         CourseDao courseDao = new CourseDao(mongo);
-        List<Course> courses = courseDao.getAllCourse();
+        List<Course> courses = courseDao.getAllCourse(false);
         request.setAttribute("courses", courses);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("currentCourses.jsp");
@@ -60,19 +61,30 @@ public class CurrentCourses extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Course course = new Course();
-        course.setCourseCode(request.getParameter("courseCode"));
-        course.setName(request.getParameter("name"));
-        course.setTeacher(request.getParameter("teacher"));
-        course.setIsArchived(false);
+        BufferedReader reader = request.getReader();
+        String line = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        while ((line = reader.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+        String id = stringBuilder.toString();
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
         CourseDao courseDao = new CourseDao(mongo);
-        courseDao.create(course);
-        System.out.println("Course Created Successfully...");
+        courseDao.archiveACourse(id);
+        String responseData = "Response data";
 
-        String url = "/coursehub/dashboard";
-        response.sendRedirect(url);
+        // Set the content type of the response
+        response.setContentType("text/plain");
+
+        // Get a PrintWriter object from the response
+        PrintWriter out = response.getWriter();
+
+        // Write the response data to the output stream
+        out.println(responseData);
+
+        // Close the PrintWriter
+        out.close();
     }
 
 }
