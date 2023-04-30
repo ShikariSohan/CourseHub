@@ -10,6 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="CourseHub" target="17" />
       <module name="MongoDBTutorial" target="17" />
     </bytecodeTargetLevel>
   </component>
