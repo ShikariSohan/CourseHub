@@ -13,7 +13,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class=" bg-purple-500">
+<body>
 <jsp:include page="header.jsp" />
 <h1>Welcome Student Dashboard</h1>
 </body>

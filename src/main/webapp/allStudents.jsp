@@ -9,7 +9,7 @@
     <title>Student List</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-purple-500">
+<body>
     <!-- Header -->
 
    <jsp:include page="header.jsp" />
