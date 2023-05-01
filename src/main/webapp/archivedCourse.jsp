@@ -41,9 +41,9 @@
           <h2 class="text-xl font-semibold text-gray-800"><%= course.getCourseCode() %></h2>
           <p class="text-gray-600"><%= course.getName() %></p>
           <p class="mt-2 text-sm font-medium text-gray-500">Teacher: <%= course.getTeacher() %></p>
-          <div class="mt-4 flex justify-end">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" style="background-color: #9e0031;" onclick="openModal('<%= course.getId()%>')"> Unarchive</button>
-          </div>
+<%--          <div class="mt-4 flex justify-end">--%>
+<%--            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" style="background-color: #9e0031;" onclick="openModalUn('<%= course.getId()%>')"> Unarchive</button>--%>
+<%--          </div>--%>
         </div>
       </div>
     </div>
@@ -65,18 +65,18 @@
             </div>
             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
               <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                Are you sure to archive this course?
+                Are you sure to unarchive this course?
               </h3>
               <div class="mt-2">
                 <p class="text-sm text-gray-500">
-                  Archiving means blocking students to join.
+                  Unarchiving means students can join again.
                 </p>
               </div>
             </div>
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <button type="button" data-dismiss="modal" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm" onclick="ArchiveCode()">
+          <button type="button" data-dismiss="modal" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm" onclick="UnarchiveCode()">
             OK
           </button>
           <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onclick="closeModal()">
@@ -88,11 +88,12 @@
   </div>
   <script>
     let code;
-    function openModal(courseCode) {
+    function openModalUn(courseCode) {
       code = courseCode
+      console.log("here")
       document.getElementById("myModal").classList.remove("hidden");
     }
-    function ArchiveCode() {
+    function UnarchiveCode() {
       console.log({code});
       document.getElementById("myModal").classList.add("hidden");
       let xhr = new XMLHttpRequest();

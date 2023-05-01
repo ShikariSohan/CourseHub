@@ -42,11 +42,23 @@
         }
 
         .tabcontent {
-            display: block;
+            display: none;
             background-color: #fff;
             padding: 1rem;
             border: 1px solid #e2e8f0;
             border-top: none;
+        }
+        #tab1 {
+            display: block;
+        }
+
+        #tab2 {
+            display: none;
+        }
+
+        .tab-btn.current[data-tab="tab1"] ~ #tab1,
+        .tab-btn.current[data-tab="tab2"] ~ #tab2 {
+            display: block;
         }
         @media (min-width: 768px) {
             .tabcontent:first-child {
@@ -66,18 +78,20 @@
                 <div id="tab1" class="tabcontent">
                     <jsp:include page="nonArchivedCourse.jsp" />
                 </div>
+            </div>
+            <div class="bg-gray-100 w-full">
                 <div id="tab2" class="tabcontent">
-                    hello wrodl
-<%--                    <jsp:include page="archivedCourse.jsp" />--%>
+                    <jsp:include page="archivedCourse.jsp" />
                 </div>
             </div>
+
         </div>
 
         <script>
             function openTab(evt, tabName) {
                 let i, tabcontent, tablinks;
 
-               // Hide all tab content
+//               Hide all tab content
                 tabcontent = document.getElementsByClassName("tabcontent");
                 for (i = 0; i < tabcontent.length; i++) {
                     tabcontent[i].style.display = "none";
@@ -93,7 +107,7 @@
                 document.getElementById(tabName).style.display = "block";
 
                 evt.currentTarget.classList.add("current");
-                console.log({evt:evt.currentTarget.classList, tabName})
+                console.log({tab1: document.getElementById("tab1").style.display,tab2: document.getElementById("tab2").style.display})
             }
         </script>
     </body>
