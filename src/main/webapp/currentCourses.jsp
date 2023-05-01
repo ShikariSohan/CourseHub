@@ -67,7 +67,8 @@
                     <jsp:include page="nonArchivedCourse.jsp" />
                 </div>
                 <div id="tab2" class="tabcontent">
-                    <jsp:include page="archivedCourse.jsp" />
+                    hello wrodl
+<%--                    <jsp:include page="archivedCourse.jsp" />--%>
                 </div>
             </div>
         </div>
