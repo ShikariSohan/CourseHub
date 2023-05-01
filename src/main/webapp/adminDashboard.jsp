@@ -14,9 +14,7 @@
 </head>
 
 <body>
-<jsp:include page="header.jsp" />
-
-
+    <jsp:include page="header.jsp" />
     <!-- Content -->
     <div class="container mx-auto my-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -45,98 +43,157 @@
             </div>
         </div>
 
-        <div class="mt-8">
-            <!-- See Student List -->
-            <a href="/coursehub/allstudent" class="inline-block bg-gray-800 hover:bg-gray-900 text-white py-2 px-4 rounded">See Student List</a>
-   <!-- See Teacher List -->
-            <a href="/coursehub/allteacher" class="inline-block bg-gray-800 hover:bg-gray-900 text-white py-2 px-4 rounded">See Teacher List</a>
 
-            <!-- See Current Course List -->
-            <a href="/coursehub/currentcourses" class="inline-block bg-gray-800 hover:bg-gray-900 text-white py-2 px-4 rounded ml-4">See Current Course List</a>
+        <div class="p-5">
+            <div class="mx-4 p-4">
+                <div class="flex items-center">
 
-            <!-- See Archive Course List -->
-            <a href="#" class="inline-block bg-gray-800 hover:bg-gray-900 text-white py-2 px-4 rounded ml-4">See Archive Course List</a>
+                    <div class="flex items-center relative text-red-900">
+                        <a href="/coursehub/allstudent">
+                            <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-red-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                        </a>
+                        <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-red-800">Student List</div>
+                    </div>
 
-            <!-- Create New Course -->
-            <a href="/coursehub/createcourse" class="inline-block bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded ml-4">Create New Course</a>
+
+                    <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-red-800"></div>
+
+                    <div class="flex items-center text-white relative">
+                        <a href="/coursehub/allteacher">
+                            <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 bg-red-900 border-red-900">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    <path d="M23 21H1"></path>
+                                </svg>
+
+                            </div>
+                        </a>
+                        <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-red-800">Teacher List</div>
+                    </div>
+
+
+
+                    <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-red-800"></div>
+
+                    <div class="flex items-center relative text-red-900">
+                        <a href="/coursehub/currentcourses">
+                            <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-red-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                    <path d="M6.5 6a2.5 2.5 0 0 1 2.5-2.5h11v14H6.5V6z"></path>
+                                </svg>
+
+                            </div>
+                        </a>
+                        <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-red-800">Current Course List</div>
+                    </div>
+
+                    <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-red-800"></div>
+
+                    <div class="flex items-center text-white relative">
+                        <a href="/coursehub/createcourse">
+                            <div class="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 bg-red-900 border-red-900">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                                </svg>
+
+                            </div>
+                        </a>
+                        <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-red-800">Create New Course</div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
-
-
-
-
-
         <div class="flex flex-col">
-          <div class="flex-1 mb-8">
-             <h2 class="text-2xl font-bold my-8">New Courses</h2>
-                      <table class="min-w-full divide-y divide-gray-200 rounded-lg">
+            <div class="flex-1 mb-8">
+                <h2 class="text-2xl font-bold my-8">New Courses</h2>
+                <table class="min-w-full divide-y divide-gray-200 rounded-lg">
+                    <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course ID</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course Name</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assigned Teacher</th>
+                    </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                    <% for ( Course course :  (List<Course>) request.getAttribute("courses")) { %>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap"><%= course.getCourseCode() %></td>
+                        <td class="px-6 py-4 whitespace-nowrap"><%= course.getName() %></td>
+                        <td class="px-6 py-4 whitespace-nowrap"><%= course.getTeacher() %></td>
+                    </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="flex-1">
+                <table class="min-w-full divide-y divide-gray-200 rounded-lg">
+                    <h2 class="text-2xl font-bold my-8">New Students</h2>
+                    <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
-                          <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course ID</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course Name</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assigned Teacher</th>
-                          </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                           <% for ( Course course :  (List<Course>) request.getAttribute("courses")) { %>
-                          <tr>
-                            <td class="px-6 py-4 whitespace-nowrap"><%= course.getCourseCode() %></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><%= course.getName() %></td>
-                            <td class="px-6 py-4 whitespace-nowrap"><%= course.getTeacher() %></td>
-                          </tr>
-                             <% } %>
-                        </tbody>
-                      </table>
-          </div>
- <div class="flex-1">
-             <table class="min-w-full divide-y divide-gray-200 rounded-lg">
-                     <h2 class="text-2xl font-bold my-8">New Students</h2>
-                      <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                          <tr>
+                        <tr>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dept</th>
-                          </tr>
+                        </tr>
                         </thead>
-                      <% for ( User student :  (List<User>) request.getAttribute("students")) { %>
+                        <% for ( User student :  (List<User>) request.getAttribute("students")) { %>
                         <tbody class="bg-white divide-y divide-gray-200">
-                          <tr>
+                        <tr>
                             <td class="px-6 py-4 whitespace-nowrap"><%= student.getName() %></td>
                             <td class="px-6 py-4 whitespace-nowrap"><%= student.getUsername() %></td>
                             <td class="px-6 py-4 whitespace-nowrap"><%= student.getDept() %></td>
-                          </tr>
+                        </tr>
                         <% } %>
-                          <tr>
+                        <tr>
                         </tbody>
-                      </table>
-           </div>
-          <div class="flex-1">
-            <table class="min-w-full divide-y divide-gray-200 rounded-lg">
+                    </table>
+                </table>
+            </div>
+            <div class="flex-1">
+                <table class="min-w-full divide-y divide-gray-200 rounded-lg">
                     <h2 class="text-2xl font-bold my-8">New Teachers</h2>
-                     <table class="min-w-full divide-y divide-gray-200">
-                       <thead class="bg-gray-50">
-                         <tr>
-                           <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                           <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
-                           <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dept</th>
-                         </tr>
-                       </thead>
-                     <% for ( User student :  (List<User>) request.getAttribute("teachers")) { %>
-                       <tbody class="bg-white divide-y divide-gray-200">
-                         <tr>
-                           <td class="px-6 py-4 whitespace-nowrap"><%= student.getName() %></td>
-                           <td class="px-6 py-4 whitespace-nowrap"><%= student.getUsername() %></td>
-                           <td class="px-6 py-4 whitespace-nowrap"><%= student.getDept() %></td>
-                         </tr>
-                       <% } %>
-                         <tr>
-                       </tbody>
-                     </table>
-          </div>
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dept</th>
+                        </tr>
+                        </thead>
+                        <% for ( User student :  (List<User>) request.getAttribute("teachers")) { %>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap"><%= student.getName() %></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><%= student.getUsername() %></td>
+                            <td class="px-6 py-4 whitespace-nowrap"><%= student.getDept() %></td>
+                        </tr>
+                        <% } %>
+                        <tr>
+                        </tbody>
+                    </table>
+                </table>
+            </div>
+
+
+
         </div>
-
-
     </div>
+
 </body>
 </html>
