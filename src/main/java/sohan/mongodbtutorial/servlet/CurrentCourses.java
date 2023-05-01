@@ -50,7 +50,9 @@ public class CurrentCourses extends HttpServlet {
                 .getAttribute("MONGO_CLIENT");
         CourseDao courseDao = new CourseDao(mongo);
         List<Course> courses = courseDao.getAllCourse(false);
+        List<Course> archived = courseDao.getAllCourse(true);
         request.setAttribute("courses", courses);
+        request.setAttribute("archived", archived);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("currentCourses.jsp");
         dispatcher.forward(request, response);
