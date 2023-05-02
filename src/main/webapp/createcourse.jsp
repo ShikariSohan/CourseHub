@@ -23,7 +23,7 @@
 					   id="courseCode"
 					   type="text"
 					   placeholder="Enter course code"
-					   name="courseCode" required>
+					   name="courseCode" required/>
 			</div>
 			<div class="mb-4">
 				<label class="block text-gray-700 font-bold mb-2" for="courseName">

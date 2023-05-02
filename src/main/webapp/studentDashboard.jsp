@@ -11,108 +11,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<style>
-  .tab-btn {
-    color: gray;
-    padding: 1rem 1.5rem;
-    display: block;
-    justify-content: center;
-    border-bottom: 2px solid white;
-    font-weight: 500;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-    position: relative;
-  }
-  .tab-btn::after {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
-    /*background-color: #9e0031;*/
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.2s ease-in-out;
-  }
-  .tab-btn.current {
-    font-weight: bold;
-    color: #9e0031;
-  }
-  .tab-btn.current::after {
-    transform: scaleX(1);
-  }
+  </head>
+  <body>
+    <jsp:include page="header.jsp" />
+    <div class="w-full flex flex-col justify-center items-center">
+      <button class="bg-gray-800 text-white font-bold py-1 px-4 my-2 rounded ml-auto mx-2" onclick="openModalCourse()">
+        <div class="flex justify-center items-center">
+          <text>Join a Course</text>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="none">
+            <style>@keyframes slide-5{to{transform:translateX(2px)}}</style>
+            <g style="animation:slide-5 1s infinite alternate both cubic-bezier(1,-.01,0,.98)">
+              <path fill="#5877d6" d="M7.666 12.75a.75.75 0 010-1.5v1.5zm4.09-1.5h.75v1.5h-.75v-1.5zm-4.09 0h4.09v1.5h-4.09v-1.5z"/>
+              <path stroke="#FFFFFF" stroke-width="1.5" d="M16.438 11.614l-2.87-2.144a.476.476 0 00-.762.382l.012 4.296a.479.479 0 00.766.382l2.857-2.153a.477.477 0 00-.003-.763z"/>
+            </g>
+          </svg></div>
 
-  .tabcontent {
-    display: none;
-    background-color: #fff;
-    padding: 1rem;
-    border: 1px solid #e2e8f0;
-    border-top: none;
-  }
-  #tab1 {
-    display: block;
-  }
-
-  #tab2 {
-    display: none;
-  }
-
-  .tab-btn.current[data-tab="tab1"] ~ #tab1,
-  .tab-btn.current[data-tab="tab2"] ~ #tab2 {
-    display: block;
-  }
-  @media (min-width: 768px) {
-    .tabcontent:first-child {
-      display: block;
-    }
-  }
-</style>
-<body>
-<jsp:include page="header.jsp" />
-<div class="w-full flex flex-col justify-center items-center">
-  <div class="flex">
-    <button class="tab-btn current" onclick="openTab(event,'tab1')">Active Courses</button>
-    <button class="tab-btn" onclick="openTab(event,'tab2')">Archived Courses</button>
-    <button class="tab-btn" style="color: #000080" onclick="openTab(event,'tab2')">Add a New Course</button>
-  </div>
-
-  <div class="bg-gray-100 w-full">
-    <div id="tab1" class="tabcontent">
-      <jsp:include page="activeCourseStudent.jsp" />
+      </button>
+          <jsp:include page="activeCourseStudent.jsp" />
     </div>
-  </div>
-  <div class="bg-gray-100 w-full">
-    <div id="tab2" class="tabcontent">
-<%--      <jsp:include page="archivedCourse.jsp" />--%>
+    <%--modal--%>
+    <div class="hidden fixed z-50 inset-0 overflow-y-auto" id="joinCourse">
+      <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+          <div class="absolute inset-0 bg-gray-500 opacity-75 backdrop-filter backdrop-blur-sm"></div>
+        </div>
+
+        <!-- Modal content -->
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                  Enter the code of the course that you want to join.
+                </h3>
+                <form  action="/coursehub/studentDashboard" method="POST">
+                    <input class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight leading-tight focus:outline-none focus:border-blue-500"
+                           id="courseCode"
+                           type="text"
+                           placeholder="Enter course code"
+                           name="courseCode" required/>
+                  <p class="text-xs text-gray-500 mt-2">Get the code from your teacher.</p>
+                  <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-2"
+                            type="submit">
+                      Join Course
+                    </button>
+                    <button class="font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-2" onclick="closeModalCourse()">
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+
+
+              </div>
+          </div>
+
+      </div>
     </div>
-  </div>
+    <script>
+      function openModalCourse() {
+        document.getElementById("joinCourse").classList.remove("hidden");
+      }
+      function closeModalCourse() {
+        document.getElementById("joinCourse").classList.add("hidden");
+      }
+    </script>
+  </body>
 
-</div>
-<script>
-  function openTab(evt, tabName) {
-    let i, tabcontent, tablinks;
-
-//               Hide all tab content
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-
-    // Remove 'current' class from all tab buttons
-    tablinks = document.getElementsByClassName("tab-btn");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].classList.remove("current");
-    }
-
-    // Show the clicked tab content and set 'current' class on clicked tab button
-    document.getElementById(tabName).style.display = "block";
-
-    evt.currentTarget.classList.add("current");
-    console.log({tab1: document.getElementById("tab1").style.display,tab2: document.getElementById("tab2").style.display})
-  }
-</script>
-</body>
 </html>
