@@ -24,7 +24,6 @@
     transition: transform 0.2s ease-in-out;
     position: relative;
   }
-
   .tab-btn::after {
     content: "";
     display: block;
@@ -33,7 +32,7 @@
     bottom: 0;
     width: 100%;
     height: 2px;
-    background-color: #9e0031;
+    /*background-color: #9e0031;*/
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.2s ease-in-out;
@@ -77,6 +76,7 @@
   <div class="flex">
     <button class="tab-btn current" onclick="openTab(event,'tab1')">Active Courses</button>
     <button class="tab-btn" onclick="openTab(event,'tab2')">Archived Courses</button>
+    <button class="tab-btn" style="color: #000080" onclick="openTab(event,'tab2')">Add a New Course</button>
   </div>
 
   <div class="bg-gray-100 w-full">
