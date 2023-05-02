@@ -43,7 +43,7 @@
             </div>
         </div>
 
-
+            <%-- stepper--%>
         <div class="p-5">
             <div class="mx-4 p-4">
                 <div class="flex items-center">
@@ -95,7 +95,7 @@
 
                             </div>
                         </a>
-                        <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-red-800">Current Course List</div>
+                        <div class="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-red-800">Course List</div>
                     </div>
 
                     <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-red-800"></div>
@@ -123,6 +123,7 @@
             <div class="flex-1 mb-8">
                 <h2 class="text-2xl font-bold my-8">New Courses</h2>
                 <table class="min-w-full divide-y divide-gray-200 rounded-lg">
+                    <thead class="bg-gray-50">
                     <thead class="bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course ID</th>

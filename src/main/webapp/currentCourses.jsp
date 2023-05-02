@@ -76,7 +76,7 @@
 
             <div class="bg-gray-100 w-full">
                 <div id="tab1" class="tabcontent">
-                    <jsp:include page="nonArchivedCourse.jsp" />
+                    <jsp:include page="activeCourse.jsp" />
                 </div>
             </div>
             <div class="bg-gray-100 w-full">
