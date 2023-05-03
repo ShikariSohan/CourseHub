@@ -95,7 +95,12 @@ public class CourseDao {
     }
 
     public String getCourseId(String courseCode) {
-        Document courseDoc = coll.find(Filters.eq("courseCode", courseCode)).first();
+        Document courseDoc = coll.find(
+                Filters.and(
+                        Filters.eq("courseCode", courseCode),
+                        Filters.eq("isArchived", false)
+                )
+        ).first();
         if (courseDoc == null) {
             return null;
         } else {
@@ -117,5 +122,34 @@ public class CourseDao {
         }
         return courses;
     }
+
+    public Course getCourseById(String id) {
+        ObjectId objectId;
+        try {
+            objectId = new ObjectId(id);
+        } catch (IllegalArgumentException e) {
+            // invalid object id
+            return null;
+        }
+
+        Document doc = coll.find(new Document("_id", objectId)).first();
+        if (doc == null) {
+            // course not found
+            return null;
+        }
+
+        String teacherId = doc.getObjectId("teacher").toString();
+        String teacherName = getTeacherNameById(teacherId);
+        return CourseConverter.toCourse(doc, teacherName);
+    }
+
+    private String getTeacherNameById(String id) {
+        Document doc = user.find(new Document("_id", new ObjectId(id))).first();
+        if (doc == null) {
+            return "Unknown";
+        }
+        return doc.getString("name");
+    }
+
 
 }

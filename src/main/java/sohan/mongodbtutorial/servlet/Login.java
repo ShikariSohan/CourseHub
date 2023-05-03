@@ -42,7 +42,7 @@ public class Login extends HttpServlet {
             String url = "/coursehub/dashboard";
             response.sendRedirect(url);
         } else {
-          
+
             RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
             dispatcher.forward(request, response);
         }
@@ -68,7 +68,6 @@ public class Login extends HttpServlet {
             session.setAttribute("id", user.getId());
             session.setAttribute("role", user.getRole());
             session.setAttribute("isLoggedIn", true);
-
             String url = "/coursehub/dashboard";
             response.sendRedirect(url);
         }

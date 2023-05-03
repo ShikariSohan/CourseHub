@@ -36,6 +36,17 @@ public class EnrollDao {
         return p;
     }
 
+    public boolean checkDuplicate(String studentId, String courseId) {
+        Document doc = this.coll.find(
+                Filters.and(
+                        Filters.eq("courseId", new ObjectId(courseId)),
+                        Filters.eq("studentId", new ObjectId(studentId))
+                )).first();
+        if (doc == null)
+            return false;
+        else return true;
+    }
+
     public List<Enroll> getCourseList(String studentId) {
         FindIterable<Document> iterable = coll.find(Filters.eq("studentId", new ObjectId(studentId)));
         List<Enroll> list = new ArrayList<>();
@@ -44,4 +55,14 @@ public class EnrollDao {
         }
         return list;
     }
+
+    public List<Enroll> getStudentList(String courseId) {
+        FindIterable<Document> iterable = coll.find(Filters.eq("courseId", new ObjectId(courseId)));
+        List<Enroll> list = new ArrayList<>();
+        for (Document doc : iterable) {
+            list.add(EnrollConverter.toCourse(doc));
+        }
+        return list;
+    }
+
 }

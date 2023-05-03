@@ -15,7 +15,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
 
+import sohan.mongodbtutorial.converter.CourseConverter;
 import sohan.mongodbtutorial.converter.UserConverter;
+import sohan.mongodbtutorial.model.Enroll;
 import sohan.mongodbtutorial.model.User;
 
 public class UserDao {
@@ -103,5 +105,17 @@ public class UserDao {
         }
         return userList;
 
+    }
+
+    public List<User> getStudentList(List<Enroll> enrolls) {
+        List<User> userList = new ArrayList<>();
+        for (Enroll enroll : enrolls) {
+            String id = enroll.getStudentId();
+            Document doc = coll.find(Filters.eq("_id", new ObjectId(id))).first();
+            if (doc != null) {
+                userList.add(UserConverter.toUser(doc));
+            }
+        }
+        return userList;
     }
 }

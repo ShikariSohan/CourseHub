@@ -93,20 +93,27 @@ public class Dashboard extends HttpServlet {
         HttpSession session = request.getSession(false);
         String courseCode = request.getParameter("courseCode");
         String studentId = (String) session.getAttribute("id");
-        EnrollDao enrollDao = new EnrollDao(mongo);
-        CourseDao courseDao = new CourseDao(mongo);
-        String courseId = courseDao.getCourseId(courseCode);
-        if (courseId != null) {
-            Enroll enroll = new Enroll();
-            enroll.setStudentId(studentId);
-            enroll.setCourseId(courseId);
-            enrollDao.create(enroll);
-            String url = "/coursehub/dashboard?q=1";
-            response.sendRedirect(url);
-        } else {
+        try {
+            EnrollDao enrollDao = new EnrollDao(mongo);
+            CourseDao courseDao = new CourseDao(mongo);
+            String courseId = courseDao.getCourseId(courseCode);
+            Boolean isDuplicate = enrollDao.checkDuplicate(studentId, courseId);
+            if (courseId != null && isDuplicate == false) {
+                Enroll enroll = new Enroll();
+                enroll.setStudentId(studentId);
+                enroll.setCourseId(courseId);
+                enrollDao.create(enroll);
+                String url = "/coursehub/dashboard?q=1";
+                response.sendRedirect(url);
+            } else {
+                String url = "/coursehub/dashboard?q=2";
+                response.sendRedirect(url);
+            }
+        } catch (Exception e) {
             String url = "/coursehub/dashboard?q=2";
             response.sendRedirect(url);
         }
+
     }
 
 }
