@@ -13,6 +13,7 @@ import com.mongodb.client.model.Filters;
 import sohan.mongodbtutorial.converter.CourseConverter;
 import sohan.mongodbtutorial.converter.UserConverter;
 import sohan.mongodbtutorial.model.Course;
+import sohan.mongodbtutorial.model.Enroll;
 import sohan.mongodbtutorial.model.User;
 
 import java.util.ArrayList;
@@ -93,5 +94,28 @@ public class CourseDao {
 
     }
 
+    public String getCourseId(String courseCode) {
+        Document courseDoc = coll.find(Filters.eq("courseCode", courseCode)).first();
+        if (courseDoc == null) {
+            return null;
+        } else {
+            return courseDoc.getObjectId("_id").toString();
+        }
+    }
+
+    public List<Course> getStudentCourses(List<Enroll> enrolls) {
+        List<Course> courses = new ArrayList<>();
+        HashMap<String, String> teacherMap = getMappedTeacher();
+        for (Enroll enroll : enrolls) {
+            String id = enroll.getCourseId();
+            Document doc = coll.find(Filters.eq("_id", new ObjectId(id))).first();
+            if (doc != null && !doc.getBoolean("isArchived")) {
+                String teacherId = doc.getObjectId("teacher").toString();
+                String teacherName = teacherMap.getOrDefault(teacherId, "Unknown");
+                courses.add(CourseConverter.toCourse(doc, teacherName));
+            }
+        }
+        return courses;
+    }
 
 }

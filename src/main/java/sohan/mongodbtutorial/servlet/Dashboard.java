@@ -2,8 +2,10 @@ package sohan.mongodbtutorial.servlet;
 
 import com.mongodb.MongoClient;
 import sohan.mongodbtutorial.dao.CourseDao;
+import sohan.mongodbtutorial.dao.EnrollDao;
 import sohan.mongodbtutorial.dao.UserDao;
 import sohan.mongodbtutorial.model.Course;
+import sohan.mongodbtutorial.model.Enroll;
 import sohan.mongodbtutorial.model.User;
 
 import java.io.IOException;
@@ -40,6 +42,7 @@ public class Dashboard extends HttpServlet {
                 .getAttribute("MONGO_CLIENT");
         UserDao userDao = new UserDao(mongo);
         CourseDao courseDao = new CourseDao(mongo);
+        EnrollDao enrollDao = new EnrollDao(mongo);
         if (session != null && session.getAttribute("id") != null) {
             System.out.println(session.getAttribute("role"));
             String role = session.getAttribute("role").toString();
@@ -65,7 +68,10 @@ public class Dashboard extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("teacherDashboard.jsp");
                 dispatcher.forward(request, response);
             } else {
-
+                String studentId = (String) session.getAttribute("id");
+                List<Enroll> enrolls = enrollDao.getCourseList(studentId);
+                List<Course> courses = courseDao.getStudentCourses(enrolls);
+                request.setAttribute("courses", courses);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("studentDashboard.jsp");
                 dispatcher.forward(request, response);
             }
@@ -81,11 +87,26 @@ public class Dashboard extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("username");
-        String password = request.getParameter("password");
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-        dispatcher.forward(request, response);
+        MongoClient mongo = (MongoClient) request.getServletContext()
+                .getAttribute("MONGO_CLIENT");
+        HttpSession session = request.getSession(false);
+        String courseCode = request.getParameter("courseCode");
+        String studentId = (String) session.getAttribute("id");
+        EnrollDao enrollDao = new EnrollDao(mongo);
+        CourseDao courseDao = new CourseDao(mongo);
+        String courseId = courseDao.getCourseId(courseCode);
+        if (courseId != null) {
+            Enroll enroll = new Enroll();
+            enroll.setStudentId(studentId);
+            enroll.setCourseId(courseId);
+            enrollDao.create(enroll);
+            String url = "/coursehub/dashboard?q=1";
+            response.sendRedirect(url);
+        } else {
+            String url = "/coursehub/dashboard?q=2";
+            response.sendRedirect(url);
+        }
     }
 
 }

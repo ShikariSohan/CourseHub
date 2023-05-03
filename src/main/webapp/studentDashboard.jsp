@@ -14,7 +14,47 @@
   </head>
   <body>
     <jsp:include page="header.jsp" />
+
+
     <div class="w-full flex flex-col justify-center items-center">
+     <%-- Error Message --%>
+      <%
+           String error = request.getParameter("q");
+           System.out.println("drddrdtgdtgddr");
+           if (error != null && error.equals("2")) {
+           %>
+                <div class="w-[200px] bg-red-100 border border-red-400 text-red-700 px-4 py-3 mt-3 rounded relative" role="alert">
+                        <strong class="font-bold">Error:</strong>
+                        <span class="block sm:inline">Course does not exist.</span>
+                      </div>
+           <%
+           }
+           %>
+
+     <%-- Success Message --%>
+       <%
+
+                System.out.println("drddrdtgdtgddr");
+                if (error != null && error.equals("1")) {
+                %>
+                        <div class="bg-green-100 border-l-4 border-green-500 py-2 px-4 my-4" role="alert">
+                            <div class="flex">
+                              <div class="py-1">
+                                <svg class="fill-current h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/>
+                                </svg>
+                              </div>
+                              <div>
+                                <p class="font-bold">Success</p>
+                                <p class="text-sm">You have successfully joined the course!</p>
+                              </div>
+                            </div>
+                          </div>
+                <%
+                }
+                %>
+
+
       <button class="bg-gray-800 text-white font-bold py-1 px-4 my-2 rounded ml-auto mx-2" onclick="openModalCourse()">
         <div class="flex justify-center items-center">
           <text>Join a Course</text>
@@ -42,7 +82,7 @@
                 <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
                   Enter the code of the course that you want to join.
                 </h3>
-                <form  action="/coursehub/studentDashboard" method="POST">
+                <form  action="/coursehub/dashboard" method="POST">
                     <input class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight leading-tight focus:outline-none focus:border-blue-500"
                            id="courseCode"
                            type="text"
