@@ -35,15 +35,16 @@
     <div class="flex flex-wrap -mx-4">
        <% for ( Course course :  (List<Course>) request.getAttribute("courses")) { %>
         <div class="w-full md:w-1/2 lg:w-1/3 p-4">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg hover:border-blue-500 border border-gray-200">
+            <a href="courseStudentList.jsp"><div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg hover:border-blue-500 border border-gray-200">
                 <div class="h-[200px] bg-<%= StringArrays.getRandomColor()%>-300 rounded-lg shadow-md overflow-hidden pattern-<%= ((int) (Math.random() * 5))+1 %>"></div>
-                <div class="p-4">
-                    <h2 class="text-xl font-semibold text-gray-800"><%= course.getCourseCode() %></h2>
-                    <p class="text-gray-600"><%= course.getName()%></p>
-                    <p class="mt-2 text-sm font-medium text-gray-500">Teacher: <%= course.getTeacher() %></p>
+                    <div class="p-4">
+                        <h2 class="text-xl font-semibold text-gray-800"><%= course.getCourseCode() %></h2>
+                        <p class="text-gray-600"><%= course.getName()%></p>
+                        <p class="mt-2 text-sm font-medium text-gray-500">Teacher: <%= course.getTeacher() %></p>
 
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
       <% } %>
     </div>

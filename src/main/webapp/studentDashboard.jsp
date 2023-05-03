@@ -23,36 +23,53 @@
            System.out.println("drddrdtgdtgddr");
            if (error != null && error.equals("2")) {
            %>
-                <div class="w-[200px] bg-red-100 border border-red-400 text-red-700 px-4 py-3 mt-3 rounded relative" role="alert">
-                        <strong class="font-bold">Error:</strong>
-                        <span class="block sm:inline">Course does not exist.</span>
-                      </div>
-           <%
+             <div class="fixed bottom-2 right-2 z-50">
+                 <div role="alert" class="relative">
+                     <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+                         <div class="flex justify-content">
+                             <text class="mr-auto">Error</text>
+                             <button type="button" class="ml-auto" onclick="closeError(this)">
+                                 <svg class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                     <path fill-rule="evenodd" d="M17.707 3.293a1 1 0 00-1.414 0L10 8.586 4.707 3.293a1 1 0 00-1.414 1.414L8.586 10l-5.293 5.293a1 1 0 000 1.414 1 1 0 001.414 0L10 11.414l5.293 5.293a1 1 0 001.414-1.414L11.414 10l5.293-5.293a1 1 0 000-1.414z" clip-rule="evenodd" />
+                                 </svg>
+                             </button>
+                         </div>
+
+                     </div>
+                     <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                         <p>It is not a valid course code.</p>
+                     </div>
+                 </div>
+             </div>
+         <%
            }
            %>
 
      <%-- Success Message --%>
        <%
+            if (error != null && error.equals("1")) {
+            %>
+         <div class="fixed bottom-2 right-2 z-50">
+             <div role="alert" class="relative">
+                 <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+                     <div class="flex justify-content">
+                         <text class="mr-auto">Success!</text>
+                         <button type="button" class="ml-auto" onclick="closeError(this)">
+                             <svg class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                 <path fill-rule="evenodd" d="M17.707 3.293a1 1 0 00-1.414 0L10 8.586 4.707 3.293a1 1 0 00-1.414 1.414L8.586 10l-5.293 5.293a1 1 0 000 1.414 1 1 0 001.414 0L10 11.414l5.293 5.293a1 1 0 001.414-1.414L11.414 10l5.293-5.293a1 1 0 000-1.414z" clip-rule="evenodd" />
+                             </svg>
+                         </button>
+                     </div>
 
-                System.out.println("drddrdtgdtgddr");
-                if (error != null && error.equals("1")) {
-                %>
-                        <div class="bg-green-100 border-l-4 border-green-500 py-2 px-4 my-4" role="alert">
-                            <div class="flex">
-                              <div class="py-1">
-                                <svg class="fill-current h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/>
-                                </svg>
-                              </div>
-                              <div>
-                                <p class="font-bold">Success</p>
-                                <p class="text-sm">You have successfully joined the course!</p>
-                              </div>
-                            </div>
-                          </div>
-                <%
-                }
-                %>
+                 </div>
+                 <div class="border border-t-0 border-green-400 rounded-b bg-green-100 px-4 py-3 text-green-700">
+                     <p>You have successfully joined the course.</p>
+                 </div>
+             </div>
+         </div>
+            <%
+            }
+            %>
 
 
       <button class="bg-gray-800 text-white font-bold py-1 px-4 my-2 rounded ml-auto mx-2" onclick="openModalCourse()">
@@ -112,6 +129,10 @@
       }
       function closeModalCourse() {
         document.getElementById("joinCourse").classList.add("hidden");
+      }
+      function closeError(errorBox) {
+          errorBox.parentNode.parentNode.parentNode.parentNode.removeChild(errorBox.parentNode.parentNode.parentNode);
+          window.location.href = "http://localhost:8080/coursehub/dashboard";
       }
     </script>
   </body>
