@@ -13,11 +13,6 @@
     <!-- Header -->
 
    <jsp:include page="header.jsp" />
-
-    <div class="mx-auto w-1/6">
-
-<h1 class="font-sans text-3xl font-semibold leading-tight text-white tracking-normal  mt-2">Student List</h1>
-</div>
     <!-- Content -->
     <div class="container mx-auto my-8">
         <div class="overflow-x-auto">

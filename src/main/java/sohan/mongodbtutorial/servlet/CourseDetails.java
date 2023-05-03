@@ -49,7 +49,7 @@ public class CourseDetails extends HttpServlet {
         List<User> students = userDao.getStudentList(enrolls);
         request.setAttribute("course", course);
         request.setAttribute("students", students);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("courseStudentList.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("courseDetailsStudent.jsp");
         dispatcher.forward(request, response);
 
     }
