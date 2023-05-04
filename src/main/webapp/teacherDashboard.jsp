@@ -84,7 +84,7 @@
       </svg></div>
 
   </button>
-<%--  <jsp:include page="activeCourseStudent.jsp" />--%>
+  <jsp:include page="activeCourseTeacher.jsp" />
 </div>
 <%--modal--%>
 <div class="hidden fixed z-50 inset-0 overflow-y-auto" id="joinCourse">
