@@ -52,7 +52,18 @@
             <span class="text-gray-600 font-semibold">Total Students: </span>
             <span class="text-gray-800"><%= request.getAttribute("studentCount") %></span>
             <div class="mt-4 flex">
-                <button class="text-white font-bold py-2 px-4 rounded" style="background-color: #9e0031;" onclick="openModal('<%= course.getId()%>')">Archive</button>
+          <%
+          if (!session.getAttribute("role").equals("student")) {
+          %>
+              <% if(course.getIsArchived()){ %>
+                  <button class="text-white font-bold py-2 px-4 rounded" style="background-color: #9e0031;" onclick="openModal('<%= course.getId()%>')">Archive</button>
+              <% } else { %>
+                  <button class="text-black font-bold py-2 px-4 rounded" style="background-color: #9e0031;" onclick="openModal('<%= course.getId()%>')">Unarchive</button>
+              <% } %>
+          <% } %>
+
+
+
             </div>
         </div>
         <div class="md:w-1/2 mt-6 md:mt-0">
