@@ -155,4 +155,16 @@ public class CourseDao {
         this.coll.deleteMany(Filters.eq("teacher", new ObjectId(id)));
     }
 
+    public List<Course> getTeacherCourse(String id) {
+        List<Course> courses = new ArrayList<>();
+        HashMap<String, String> teacherMap = getMappedTeacher();
+        FindIterable<Document> iterable = coll.find(Filters.eq("teacher", new ObjectId(id)));
+        for (Document doc : iterable) {
+            String teacherId = doc.getObjectId("teacher").toString();
+            String teacherName = teacherMap.getOrDefault(teacherId, "Unknown");
+            courses.add(CourseConverter.toCourse(doc, teacherName));
+        }
+        return courses;
+    }
+
 }

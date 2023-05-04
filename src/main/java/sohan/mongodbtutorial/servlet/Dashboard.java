@@ -65,6 +65,9 @@ public class Dashboard extends HttpServlet {
                 dispatcher.forward(request, response);
 
             } else if (role.equals("teacher")) {
+                String teacherId = (String) session.getAttribute("id");
+                List<Course> courses = courseDao.getTeacherCourse(teacherId);
+                request.setAttribute("courses", courses);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("teacherDashboard.jsp");
                 dispatcher.forward(request, response);
             } else {
