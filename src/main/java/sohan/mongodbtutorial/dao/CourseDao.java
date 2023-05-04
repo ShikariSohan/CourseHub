@@ -151,5 +151,8 @@ public class CourseDao {
         return doc.getString("name");
     }
 
+    public void deleteTeacherCourses(String id) {
+        this.coll.deleteMany(Filters.eq("teacher", new ObjectId(id)));
+    }
 
 }

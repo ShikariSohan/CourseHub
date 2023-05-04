@@ -118,4 +118,8 @@ public class UserDao {
         }
         return userList;
     }
+
+    public void deleteUser(String id) {
+        this.coll.deleteOne(Filters.eq("_id", new ObjectId(id)));
+    }
 }

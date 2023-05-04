@@ -65,4 +65,8 @@ public class EnrollDao {
         return list;
     }
 
+    public void deleteStudentEnroll(String id) {
+        this.coll.deleteMany(Filters.eq("studentId", new ObjectId(id)));
+    }
+
 }

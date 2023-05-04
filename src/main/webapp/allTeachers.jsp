@@ -102,15 +102,15 @@
         function DeleteId() {
             console.log({id});
             document.getElementById("myModal").classList.add("hidden");
-            // let xhr = new XMLHttpRequest();
-            // xhr.open('POST', '/coursehub/currentcourses', true);
-            // xhr.setRequestHeader('Content-Type', 'application/json');
-            // xhr.onreadystatechange = function() {
-            //     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            //         location.reload(true);
-            //     }
-            // };
-            // xhr.send(code);
+             let xhr = new XMLHttpRequest();
+             xhr.open('POST', '/coursehub/allteacher', true);
+             xhr.setRequestHeader('Content-Type', 'application/json');
+             xhr.onreadystatechange = function() {
+                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                     location.reload(true);
+                 }
+             };
+             xhr.send(id);
         }
         function closeModal() {
             document.getElementById("myModal").classList.add("hidden");

@@ -47,8 +47,10 @@ public class CourseDetails extends HttpServlet {
         Course course = courseDao.getCourseById(courseId);
         List<Enroll> enrolls = enrollDao.getStudentList(courseId);
         List<User> students = userDao.getStudentList(enrolls);
+        int studentCount = students.size();
         request.setAttribute("course", course);
         request.setAttribute("students", students);
+        request.setAttribute("studentCount", studentCount);
         RequestDispatcher dispatcher = request.getRequestDispatcher("courseDetailsStudent.jsp");
         dispatcher.forward(request, response);
 
