@@ -76,12 +76,12 @@
 
             <div class="bg-gray-100 w-full">
                 <div id="tab1" class="tabcontent">
-                    <jsp:include page="activeCourse.jsp" />
+                    <jsp:include page="activeCourseAdmin.jsp" />
                 </div>
             </div>
             <div class="bg-gray-100 w-full">
                 <div id="tab2" class="tabcontent">
-                    <jsp:include page="archivedCourse.jsp" />
+                    <jsp:include page="archivedCourseAdmin.jsp" />
                 </div>
             </div>
 

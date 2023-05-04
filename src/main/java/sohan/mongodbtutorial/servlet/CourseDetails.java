@@ -51,7 +51,7 @@ public class CourseDetails extends HttpServlet {
         request.setAttribute("course", course);
         request.setAttribute("students", students);
         request.setAttribute("studentCount", studentCount);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("courseDetailsStudent.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("courseDetails.jsp");
         dispatcher.forward(request, response);
 
     }

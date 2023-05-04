@@ -43,7 +43,7 @@
             <p class="text-gray-600"><%= course.getName() %></p>
             <p class="mt-2 text-sm font-medium text-gray-500">Teacher: <%= course.getTeacher() %></p>
             <div class="mt-4 flex justify-end">
-              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" style="background-color: #9e0031;" onclick="openModal('<%= course.getId()%>')">Archive</button>
+              <button class="text-white font-bold py-2 px-4 rounded" style="background-color: #9e0031;" onclick="openModal('<%= course.getId()%>')">Archive</button>
             </div>
           </div>
         </div>
