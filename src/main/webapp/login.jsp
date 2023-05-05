@@ -32,10 +32,9 @@
         <input type="password" name="password" id="password" class="w-full border border-gray-300 p-2 rounded-lg" required>
       </div>
       <div class="flex items-center justify-between">
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button type="submit" class="bg-red-900 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
           Login
         </button>
-        <a href="#" class="text-gray-600 hover:text-gray-800">Forgot Password?</a>
       </div>
     </form>
   </div>
