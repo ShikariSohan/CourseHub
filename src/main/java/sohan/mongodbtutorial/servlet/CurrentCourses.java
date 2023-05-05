@@ -69,11 +69,15 @@ public class CurrentCourses extends HttpServlet {
         while ((line = reader.readLine()) != null) {
             stringBuilder.append(line);
         }
-        String id = stringBuilder.toString();
+        String token = stringBuilder.toString();
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
+        String[] parts = token.split("-");
+        String val = parts[0];
+        String id = parts[1];
+        boolean isTrue = val.equals("T");
         CourseDao courseDao = new CourseDao(mongo);
-        courseDao.archiveACourse(id);
+        courseDao.archiveACourse(id, !isTrue);
         String responseData = "Response data";
 
         // Set the content type of the response

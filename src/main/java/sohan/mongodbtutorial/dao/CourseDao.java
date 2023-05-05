@@ -81,7 +81,7 @@ public class CourseDao {
         return (int) coll.countDocuments(Filters.eq("isArchived", false));
     }
 
-    public void archiveACourse(String id) {
+    public void archiveACourse(String id, Boolean toggle) {
         ObjectId objectId;
         try {
             objectId = new ObjectId(id);
@@ -89,7 +89,7 @@ public class CourseDao {
             return;
         }
         Document filter = new Document("_id", objectId);
-        Document update = new Document("$set", new Document("isArchived", true));
+        Document update = new Document("$set", new Document("isArchived", toggle));
         this.coll.updateOne(filter, update);
 
     }
@@ -114,7 +114,7 @@ public class CourseDao {
         for (Enroll enroll : enrolls) {
             String id = enroll.getCourseId();
             Document doc = coll.find(Filters.eq("_id", new ObjectId(id))).first();
-            if (doc != null && !doc.getBoolean("isArchived")) {
+            if (doc != null) {
                 String teacherId = doc.getObjectId("teacher").toString();
                 String teacherName = teacherMap.getOrDefault(teacherId, "Unknown");
                 courses.add(CourseConverter.toCourse(doc, teacherName));

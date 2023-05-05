@@ -164,36 +164,27 @@
 </div>
 <script>
     let code;
-    let isArch = false;
     function openModal(courseCode, isArchived) {
-        isArch = isArchived===true?true:false;
-        code = courseCode
-        document.getElementById("myModal").classList.remove("hidden");
+         code = courseCode
+         code = (isArchived==="true") ? "T-" + code : "F-" + code;
+         console.log(isArchived);
+         console.log(code);
+         document.getElementById("myModal").classList.remove("hidden");
     }
     function OKButton(){
-        if(isArch) {
-            ArchiveCode();
-        }
-        else {
-            UnarchiveCode();
-        };
-    }
-    function ArchiveCode() {
-        console.log({code});
-        document.getElementById("myModal").classList.add("hidden");
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', '/coursehub/currentcourses', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                location.reload(true);
-            }
-        };
-        xhr.send(code);
-    }
-    function UnarchiveCode(){
 
+              document.getElementById("myModal").classList.add("hidden");
+              let xhr = new XMLHttpRequest();
+              xhr.open('POST', '/coursehub/currentcourses', true);
+              xhr.setRequestHeader('Content-Type', 'application/json');
+              xhr.onreadystatechange = function() {
+                  if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                      location.reload(true);
+                  }
+              };
+            xhr.send(code);
     }
+
     function closeModal() {
         document.getElementById("myModal").classList.add("hidden");
     }
