@@ -66,8 +66,11 @@ public class Dashboard extends HttpServlet {
 
             } else if (role.equals("teacher")) {
                 String teacherId = (String) session.getAttribute("id");
-                List<Course> courses = courseDao.getTeacherCourse(teacherId);
+                List<Course> courses = courseDao.getTeacherCourse(teacherId, false);
+                List<Course> archivedCourses = courseDao.getTeacherCourse(teacherId, true);
+                request.setAttribute("archivedCourses", archivedCourses);
                 request.setAttribute("courses", courses);
+                System.out.println(courses.size());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("teacherDashboard.jsp");
                 dispatcher.forward(request, response);
             } else {

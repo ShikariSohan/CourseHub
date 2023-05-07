@@ -84,7 +84,26 @@
           </svg></div>
 
       </button>
+      <%
+         List<Course> courses = (List<Course>)request.getAttribute("courses");
+         if(courses.isEmpty()) {
+      %>
+         <div class="flex items-center justify-center">
+             <div class="text-center">
+                 <svg class="h-24 w-24 text-gray-400 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/>
+                 </svg>
+                 <h2 class="mt-2 text-lg font-bold text-gray-900">No Courses Available</h2>
+                 <p class="mt-1 text-gray-500">Sorry, there are no courses available to display.</p>
+             </div>
+         </div>
+      <%
+         } else {
+      %>
           <jsp:include page="allCourseStudent.jsp" />
+          <%
+             }
+          %>
     </div>
     <%--modal--%>
     <div class="hidden fixed z-50 inset-0 overflow-y-auto" id="joinCourse">
@@ -123,6 +142,12 @@
 
       </div>
     </div>
+    <footer class="bg-white py-4">
+      <div class="container mx-auto text-center">
+        <p class="text-gray-500 text-sm">© 2023 CourseHub. All rights reserved.</p>
+      </div>
+    </footer>
+
     <script>
       function openModalCourse() {
         document.getElementById("joinCourse").classList.remove("hidden");

@@ -92,6 +92,11 @@
             </div>
         </div>
     </div>
+    <footer class="bg-white py-4">
+          <div class="container mx-auto text-center">
+            <p class="text-gray-500 text-sm">© 2023 CourseHub. All rights reserved.</p>
+          </div>
+        </footer>
     <script>
         let id;
         function openModal(teacherId) {

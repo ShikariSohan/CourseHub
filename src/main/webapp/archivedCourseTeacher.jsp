@@ -32,8 +32,24 @@
   }
 </style>
 <div class="container mx-auto my-8">
+ <%
+         List<Course> archivedCourses = (List<Course>)request.getAttribute("archivedCourses");
+         if(archivedCourses.isEmpty()) {
+      %>
+         <div class="flex items-center justify-center">
+             <div class="text-center">
+                 <svg class="h-24 w-24 text-gray-400 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/>
+                 </svg>
+                 <h2 class="mt-2 text-lg font-bold text-gray-900">No Courses Available</h2>
+                 <p class="mt-1 text-gray-500">Sorry, there are no courses available to display.</p>
+             </div>
+         </div>
+         <%
+                  }
+               %>
   <div class="flex flex-wrap -mx-4">
-    <% for ( Course course :  (List<Course>) request.getAttribute("courses")) { %>
+    <% for ( Course course :  (List<Course>) request.getAttribute("archivedCourses")) { %>
     <div class="w-full md:w-1/2 lg:w-1/3 p-4">
       <a href="/coursehub/coursedetails?id=<%= course.getId()%>"><div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg hover:border-blue-500 border border-gray-200">
         <div class="h-[200px] bg-<%= StringArrays.getRandomColor()%>-300 rounded-lg shadow-md overflow-hidden pattern-<%= ((int) (Math.random() * 5))+1 %>"></div>
