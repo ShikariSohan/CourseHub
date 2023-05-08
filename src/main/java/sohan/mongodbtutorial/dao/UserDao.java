@@ -1,7 +1,6 @@
 
 package sohan.mongodbtutorial.dao;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,21 +11,34 @@ import org.bson.types.ObjectId;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
 
-import sohan.mongodbtutorial.converter.CourseConverter;
 import sohan.mongodbtutorial.converter.UserConverter;
 import sohan.mongodbtutorial.model.Enroll;
 import sohan.mongodbtutorial.model.User;
 
+/**
+ * The UserDao class represents DAO (Data Access Object) operations for the User
+ * model in MongoDB.
+ */
 public class UserDao {
     private MongoCollection<Document> coll;
 
+    /**
+     * Constructor to initialize a new UserDao object.
+     * 
+     * @param mongo MongoClient object used to connect to the MongoDB server.
+     */
     public UserDao(MongoClient mongo) {
         this.coll = mongo.getDatabase("coursehub").getCollection("user");
     }
 
+    /**
+     * Creates a new User document in the MongoDB collection.
+     * 
+     * @param p User object to be created.
+     * @return User object that was created with ID assigned.
+     */
     public User create(User p) {
         Document doc = UserConverter.toDocument(p);
         this.coll.insertOne(doc);
@@ -35,24 +47,44 @@ public class UserDao {
         return p;
     }
 
-//    public void update( p) {
-//        this.coll.updateOne(Filters.eq("_id", new ObjectId(p.getId())), new Document("$set", ProductConverter.toDocument(p)));
-//    }
-
+    /**
+     * Deletes a User document from the MongoDB collection by ID.
+     * 
+     * @param id ID of the User document to be deleted.
+     */
     public void delete(String id) {
         this.coll.deleteOne(Filters.eq("_id", new ObjectId(id)));
     }
 
+    /**
+     * Checks whether a User document with a given ID exists in the MongoDB
+     * collection.
+     * 
+     * @param id ID of the User document to check existence of.
+     * @return true if document exists, false otherwise.
+     */
     public boolean exists(String id) {
         FindIterable<Document> doc = this.coll.find(Filters.eq("_id", id)).limit(1);
         return doc != null;
     }
 
+    /**
+     * Checks whether a User document with a given name exists in the MongoDB
+     * collection.
+     * 
+     * @param id Name of the User document to check existence of.
+     * @return true if document exists, false otherwise.
+     */
     public boolean checkUserName(String id) {
         FindIterable<Document> doc = this.coll.find(Filters.eq("name", id)).limit(1);
         return doc != null;
     }
 
+    /**
+     * Gets a List of all User documents in the MongoDB collection.
+     * 
+     * @return List of all User objects.
+     */
     public List<User> getList() {
         List<User> list = new ArrayList<>();
         for (Document doc : coll.find()) {
@@ -61,22 +93,41 @@ public class UserDao {
         return list;
     }
 
+    /**
+     * Gets a User document from the MongoDB collection by ID.
+     * 
+     * @param id ID of the User document to get.
+     * @return User object of the requested ID.
+     */
     public User getUser(String id) {
         Document doc = this.coll.find(Filters.eq("_id", new ObjectId(id))).first();
         return UserConverter.toUser(doc);
     }
 
+    /**
+     * Checks the username and password credentials of a User document in the
+     * MongoDB collection.
+     * 
+     * @param username Username credential to check.
+     * @param password Password credential to check.
+     * @return User object if credentials match, null otherwise.
+     */
     public User checkCredentials(String username, String password) {
         Document doc = this.coll.find(
                 Filters.and(
                         Filters.eq("username", username),
-                        Filters.eq("password", password)
-                )).first();
+                        Filters.eq("password", password)))
+                .first();
         if (doc == null)
             return null;
-        else return UserConverter.toUser(doc);
+        else
+            return UserConverter.toUser(doc);
     }
 
+    /**
+     * 
+     * @return list of all students
+     */
     public List<User> getAllStudent() {
         List<User> studentList = new ArrayList<>();
         for (Document doc : coll.find(Filters.eq("role", "student"))) {
@@ -84,6 +135,11 @@ public class UserDao {
         }
         return studentList;
     }
+
+    /**
+     * 
+     * @return list of all Teachers
+     */
 
     public List<User> getAllTeacher() {
         List<User> studentList = new ArrayList<>();
@@ -93,9 +149,19 @@ public class UserDao {
         return studentList;
     }
 
+    /**
+     * @param role role of the user
+     * @return count of the user
+     */
+
     public int getUserCount(String role) {
         return (int) coll.countDocuments(Filters.eq("role", role));
     }
+
+    /**
+     * @param role role of the user
+     * @return list of recent user
+     */
 
     public List<User> getRecentUser(String role) {
         List<User> userList = new ArrayList<>();
@@ -107,6 +173,10 @@ public class UserDao {
 
     }
 
+    /**
+     * @param id id of the user
+     * @return list of the course
+     */
     public List<User> getStudentList(List<Enroll> enrolls) {
         List<User> userList = new ArrayList<>();
         for (Enroll enroll : enrolls) {
@@ -119,6 +189,9 @@ public class UserDao {
         return userList;
     }
 
+    /**
+     * @param id id of the user
+     */
     public void deleteUser(String id) {
         this.coll.deleteOne(Filters.eq("_id", new ObjectId(id)));
     }

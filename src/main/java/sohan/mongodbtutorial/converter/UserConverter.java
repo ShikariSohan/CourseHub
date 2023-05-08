@@ -5,10 +5,17 @@ import org.bson.types.ObjectId;
 
 import sohan.mongodbtutorial.model.User;
 
+/**
+ * A utility class that provides methods for converting between User objects and MongoDB Documents.
+ */
 public class UserConverter {
 
-    // convert Product Object to MongoDB Document
-    // take special note of converting id String to ObjectId
+    /**
+     * Converts a User object to a MongoDB Document.
+     *
+     * @param u The User object to convert
+     * @return The MongoDB Document
+     */
     public static Document toDocument(User u) {
         Document doc = new Document("name", u.getName());
         doc.append("password", u.getPassword());
@@ -24,6 +31,12 @@ public class UserConverter {
         return doc;
     }
 
+    /**
+     * Converts a MongoDB Document to a User object.
+     *
+     * @param doc The MongoDB Document to convert
+     * @return The User object
+     */
     public static User toUser(Document doc) {
         User u = new User();
         u.setName((String) doc.get("name"));
@@ -33,8 +46,6 @@ public class UserConverter {
         u.setDept((String) doc.get("dept"));
         u.setUsername((String) doc.get("username"));
         u.setValid((Boolean) doc.get("isValid"));
-
-
         u.setId(((ObjectId) doc.get("_id")).toString());
         return u;
     }

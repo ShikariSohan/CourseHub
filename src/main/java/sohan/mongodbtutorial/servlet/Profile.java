@@ -5,9 +5,6 @@ import sohan.mongodbtutorial.dao.UserDao;
 import sohan.mongodbtutorial.model.User;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class register
+ * Servlet implementation class Profile
+ * This servlet is used to display the profile of a logged in user
  */
 @WebServlet("/profile")
 public class Profile extends HttpServlet {
@@ -29,15 +27,19 @@ public class Profile extends HttpServlet {
      */
     public Profile() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("id") != null) {
+            // If the user is logged in, fetch their details from the database and display
+            // their profile
             MongoClient mongo = (MongoClient) request.getServletContext()
                     .getAttribute("MONGO_CLIENT");
             UserDao userDao = new UserDao(mongo);
@@ -50,36 +52,10 @@ public class Profile extends HttpServlet {
             dispatcher.forward(request, response);
 
         } else {
+            // If the user is not logged in, redirect to the login page
             String url = "coursehub/login";
             response.sendRedirect(url);
         }
-    }
-
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        MongoClient mongo = (MongoClient) request.getServletContext()
-                .getAttribute("MONGO_CLIENT");
-        UserDao userDao = new UserDao(mongo);
-        User user = userDao.checkCredentials(username, password);
-
-
-        if (user == null) {
-            response.sendRedirect("login.jsp?error=1");
-        } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("username", username);
-            session.setAttribute("id", user.getId());
-            session.setAttribute("role", user.getRole());
-            session.setAttribute("isLoggedIn", true);
-
-            String url = "/coursehub/dashboard";
-            response.sendRedirect(url);
-        }
-
     }
 
 }

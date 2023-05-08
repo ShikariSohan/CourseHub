@@ -1,5 +1,8 @@
 package sohan.mongodbtutorial.model;
 
+/**
+ * This class represents a user in the system.
+ */
 public class User {
     private String id;
     private String name;
@@ -10,7 +13,8 @@ public class User {
     private String dept;
     private Boolean isValid;
 
-    public User(String id, String name, String email, String password, String role, String username, String dept, Boolean isValid) {
+    public User(String id, String name, String email, String password, String role, String username, String dept,
+            Boolean isValid) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -54,7 +58,6 @@ public class User {
         this.dept = dept;
         this.isValid = false;
     }
-
 
     public User() {
     }

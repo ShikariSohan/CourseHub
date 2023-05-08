@@ -1,5 +1,8 @@
 package sohan.mongodbtutorial.model;
 
+/**
+ * This class represents a course in the system.
+ */
 public class Course {
     private String id;
     private String name;

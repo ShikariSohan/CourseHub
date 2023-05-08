@@ -2,9 +2,7 @@ package sohan.mongodbtutorial.servlet;
 
 import com.mongodb.MongoClient;
 import sohan.mongodbtutorial.dao.CourseDao;
-import sohan.mongodbtutorial.dao.UserDao;
 import sohan.mongodbtutorial.model.Course;
-import sohan.mongodbtutorial.model.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class CurrentCourses
@@ -31,38 +28,39 @@ public class CurrentCourses extends HttpServlet {
      */
     public CurrentCourses() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     * This method handles GET requests to the "/currentcourses" URL.
+     * It retrieves all courses that are not archived from the database,
+     * as well as all archived courses.
+     * It then sets these courses as request attributes and forwards the
+     * request and response to the "currentCourses.jsp" page for rendering.
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        HttpSession session = request.getSession(false);
-//        if (session != null) {
-//            System.out.println(session.getAttribute("id"));
-//            System.out.println(session.getAttribute("role"));
-//        } else {
-//            System.out.println("Noooooooooo");
-//        }
-//        find all the students...
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
         CourseDao courseDao = new CourseDao(mongo);
-        List<Course> courses = courseDao.getAllCourse(false);
-        List<Course> archived = courseDao.getAllCourse(true);
+        List<Course> courses = courseDao.getAllCourse(false); // get all non-archived courses
+        List<Course> archived = courseDao.getAllCourse(true); // get all archived courses
         request.setAttribute("courses", courses);
         request.setAttribute("archived", archived);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("currentCourses.jsp");
         dispatcher.forward(request, response);
-
     }
 
     /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     * This method handles POST requests to the "/currentcourses" URL.
+     * It receives data from the client via an AJAX call, which is in the form
+     * of a boolean value and a course ID, separated by a dash.
+     * It then updates the course's archived status in the database
+     * using the CourseDao class, based on the boolean value received.
+     * Finally, it sends a plain text response back to the client.
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         BufferedReader reader = request.getReader();
         String line = null;
         StringBuilder stringBuilder = new StringBuilder();
@@ -75,9 +73,10 @@ public class CurrentCourses extends HttpServlet {
         String[] parts = token.split("-");
         String val = parts[0];
         String id = parts[1];
-        boolean isTrue = val.equals("T");
+        boolean isTrue = val.equals("T"); // boolean value indicating whether the course should be archived or
+                                          // unarchived
         CourseDao courseDao = new CourseDao(mongo);
-        courseDao.archiveACourse(id, !isTrue);
+        courseDao.archiveACourse(id, !isTrue); // update the course's archived status in the database
         String responseData = "Response data";
 
         // Set the content type of the response
@@ -92,5 +91,4 @@ public class CurrentCourses extends HttpServlet {
         // Close the PrintWriter
         out.close();
     }
-
 }

@@ -2,7 +2,6 @@ package sohan.mongodbtutorial.servlet;
 
 import com.mongodb.MongoClient;
 import sohan.mongodbtutorial.dao.CourseDao;
-import sohan.mongodbtutorial.dao.EnrollDao;
 import sohan.mongodbtutorial.dao.UserDao;
 import sohan.mongodbtutorial.model.User;
 
@@ -17,10 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Sohan
+ * Servlet implementation class allTeacher
  */
 @WebServlet("/allteacher")
 public class AllTeacher extends HttpServlet {
@@ -31,21 +29,18 @@ public class AllTeacher extends HttpServlet {
      */
     public AllTeacher() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        HttpSession session = request.getSession(false);
-//        if (session != null) {
-//            System.out.println(session.getAttribute("id"));
-//            System.out.println(session.getAttribute("role"));
-//        } else {
-//            System.out.println("Noooooooooo");
-//        }
-//        find all the students...
+    /**
+     * Handles GET requests to display all the teachers
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
         UserDao userDao = new UserDao(mongo);
@@ -59,9 +54,14 @@ public class AllTeacher extends HttpServlet {
     }
 
     /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+     * Handles POST requests to delete a teacher
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         BufferedReader reader = request.getReader();
         String line = null;
         StringBuilder stringBuilder = new StringBuilder();

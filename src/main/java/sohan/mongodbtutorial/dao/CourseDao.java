@@ -7,27 +7,36 @@ import org.bson.types.ObjectId;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
-
 import sohan.mongodbtutorial.converter.CourseConverter;
-import sohan.mongodbtutorial.converter.UserConverter;
 import sohan.mongodbtutorial.model.Course;
 import sohan.mongodbtutorial.model.Enroll;
-import sohan.mongodbtutorial.model.User;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * CourseDao class for interacting with the "course" and "user" collections in the MongoDB database.
+ */
 public class CourseDao {
     private MongoCollection<Document> coll, user;
 
+    /**
+     * Constructor for creating a new CourseDao object.
+     *
+     * @param mongo The MongoClient to use for database operations.
+     */
     public CourseDao(MongoClient mongo) {
         this.coll = mongo.getDatabase("coursehub").getCollection("course");
         this.user = mongo.getDatabase("coursehub").getCollection("user");
     }
 
+    /**
+     * Create a new Course document in the "course" collection.
+     *
+     * @param p The Course object to create.
+     * @return The Course object with an updated ID.
+     */
     public Course create(Course p) {
         Document doc = CourseConverter.toDocument(p);
         this.coll.insertOne(doc);
@@ -36,6 +45,11 @@ public class CourseDao {
         return p;
     }
 
+    /**
+     * Get a list of the two most recent Courses in the "course" collection.
+     *
+     * @return A list of Course objects.
+     */
     public List<Course> getRecentCourses() {
         List<Course> courses = new ArrayList<>();
 
@@ -49,6 +63,12 @@ public class CourseDao {
         return courses;
     }
 
+    /**
+     * Get a list of all Courses in the "course" collection.
+     *
+     * @param isArchived Whether to include archived Courses in the list.
+     * @return A list of Course objects.
+     */
     public List<Course> getAllCourse(boolean isArchived) {
         List<Course> courses = new ArrayList<>();
         HashMap<String, String> teacherMap = getMappedTeacher();
@@ -61,7 +81,11 @@ public class CourseDao {
         return courses;
     }
 
-
+    /**
+     * Get a HashMap of teacher IDs to teacher names for all teachers in the "user" collection with the role "teacher".
+     *
+     * @return A HashMap of teacher IDs to teacher names.
+     */
     private HashMap<String, String> getMappedTeacher() {
         FindIterable<Document> teachers = user.find(Filters.eq("role", "teacher"));
         HashMap<String, String> teacherMap = new HashMap<>();
@@ -73,14 +97,29 @@ public class CourseDao {
         return teacherMap;
     }
 
+    /**
+     * Get the total number of Courses in the "course" collection.
+     *
+     * @return The number of Courses.
+     */
     public int getCourseCount() {
         return (int) coll.countDocuments();
     }
 
+    /**
+     * Get the number of active Courses (not archived) in the "course" collection.
+     *
+     * @return The number of active Courses.
+     */
     public int getRunningCourseCount() {
         return (int) coll.countDocuments(Filters.eq("isArchived", false));
     }
 
+    /**
+     * 
+     * @param id The id of the course to take action
+     * @param toggle Toggle between tarchiverue and false
+     */
     public void archiveACourse(String id, Boolean toggle) {
         ObjectId objectId;
         try {
@@ -93,7 +132,11 @@ public class CourseDao {
         this.coll.updateOne(filter, update);
 
     }
-
+    /**
+     * 
+     * @param courseCode 
+     * @return
+     */
     public String getCourseId(String courseCode) {
         Document courseDoc = coll.find(
                 Filters.and(
@@ -107,6 +150,11 @@ public class CourseDao {
             return courseDoc.getObjectId("_id").toString();
         }
     }
+    /**
+     * 
+     * @param enrolls
+     * @return
+     */
 
     public List<Course> getStudentCourses(List<Enroll> enrolls) {
         List<Course> courses = new ArrayList<>();
@@ -122,6 +170,11 @@ public class CourseDao {
         }
         return courses;
     }
+    /**
+     * 
+     * @param id
+     * @return course
+     */
 
     public Course getCourseById(String id) {
         ObjectId objectId;
@@ -150,11 +203,19 @@ public class CourseDao {
         }
         return doc.getString("name");
     }
-
+    /**
+     * 
+     * @param id
+     */
     public void deleteTeacherCourses(String id) {
         this.coll.deleteMany(Filters.eq("teacher", new ObjectId(id)));
     }
-
+    /**
+     * 
+     * @param id
+     * @param isArchived
+     * @return
+     */
     public List<Course> getTeacherCourse(String id, Boolean isArchived) {
         List<Course> courses = new ArrayList<>();
         HashMap<String, String> teacherMap = getMappedTeacher();

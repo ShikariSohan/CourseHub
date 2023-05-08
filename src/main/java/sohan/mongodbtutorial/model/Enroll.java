@@ -1,5 +1,8 @@
 package sohan.mongodbtutorial.model;
 
+/**
+ * This class represents a Enroll in the system.
+ */
 public class Enroll {
     private String id;
     private String studentId;

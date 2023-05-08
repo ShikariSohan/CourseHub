@@ -1,6 +1,5 @@
 package sohan.mongodbtutorial.servlet;
 
-
 import com.mongodb.MongoClient;
 import sohan.mongodbtutorial.dao.EnrollDao;
 import sohan.mongodbtutorial.dao.UserDao;
@@ -17,10 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Sohan
+ * Servlet implementation class AllStudent
  */
 @WebServlet("/allstudent")
 public class AllStudent extends HttpServlet {
@@ -31,37 +29,45 @@ public class AllStudent extends HttpServlet {
      */
     public AllStudent() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     * Handles HTTP GET requests. Retrieves all the students from the database and
+     * forwards the request to the JSP file 'allStudents.jsp'
+     * 
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        HttpSession session = request.getSession(false);
-//        if (session != null) {
-//            System.out.println(session.getAttribute("id"));
-//            System.out.println(session.getAttribute("role"));
-//        } else {
-//            System.out.println("Noooooooooo");
-//        }
-//        find all the students...
-        MongoClient mongo = (MongoClient) request.getServletContext()
-                .getAttribute("MONGO_CLIENT");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
         UserDao userDao = new UserDao(mongo);
+
+        // Retrieve all the students from the database
         List<User> students = userDao.getAllStudent();
         System.out.println(students.size());
+
+        // Set the 'students' attribute of the request object to the retrieved list of
+        // students
         request.setAttribute("students", students);
 
+        // Forward the request and response objects to the 'allStudents.jsp' file for
+        // rendering
         RequestDispatcher dispatcher = request.getRequestDispatcher("allStudents.jsp");
         dispatcher.forward(request, response);
-
     }
 
     /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     * Handles HTTP POST requests. Deletes the user and all its associated
+     * enrollments from the database and sends a plain text response back to the
+     * client.
+     * 
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Read the request body and get the user id to be deleted
         BufferedReader reader = request.getReader();
         String line = null;
         StringBuilder stringBuilder = new StringBuilder();
@@ -70,12 +76,15 @@ public class AllStudent extends HttpServlet {
         }
         String id = stringBuilder.toString();
         System.out.println(id);
-        MongoClient mongo = (MongoClient) request.getServletContext()
-                .getAttribute("MONGO_CLIENT");
+
+        // Delete the user and all its associated enrollments from the database
+        MongoClient mongo = (MongoClient) request.getServletContext().getAttribute("MONGO_CLIENT");
         UserDao userDao = new UserDao(mongo);
         EnrollDao enrollDao = new EnrollDao(mongo);
         userDao.deleteUser(id);
         enrollDao.deleteStudentEnroll(id);
+
+        // Prepare the response data
         String responseData = "Response data";
 
         // Set the content type of the response
@@ -90,5 +99,4 @@ public class AllStudent extends HttpServlet {
         // Close the PrintWriter
         out.close();
     }
-
 }

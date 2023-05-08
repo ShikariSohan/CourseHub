@@ -9,7 +9,6 @@ import sohan.mongodbtutorial.model.Enroll;
 import sohan.mongodbtutorial.model.User;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 @WebServlet("/dashboard")
 public class Dashboard extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -30,13 +28,20 @@ public class Dashboard extends HttpServlet {
      */
     public Dashboard() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     * Processes GET requests.
+     * Retrieves information from the database based on user role and forwards to
+     * the appropriate dashboard.
+     * If user is not logged in, redirects to the login page.
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
@@ -47,6 +52,8 @@ public class Dashboard extends HttpServlet {
             System.out.println(session.getAttribute("role"));
             String role = session.getAttribute("role").toString();
             if (role.equals("admin")) {
+                // Retrieve information for admin dashboard
+
                 List<User> teachers = userDao.getRecentUser("teacher");
                 List<User> students = userDao.getRecentUser("student");
                 List<Course> courses = courseDao.getRecentCourses();
@@ -65,6 +72,8 @@ public class Dashboard extends HttpServlet {
                 dispatcher.forward(request, response);
 
             } else if (role.equals("teacher")) {
+                // Retrieve information for teacher dashboard
+
                 String teacherId = (String) session.getAttribute("id");
                 List<Course> courses = courseDao.getTeacherCourse(teacherId, false);
                 List<Course> archivedCourses = courseDao.getTeacherCourse(teacherId, true);
@@ -74,6 +83,8 @@ public class Dashboard extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("teacherDashboard.jsp");
                 dispatcher.forward(request, response);
             } else {
+                // Retrieve information for student dashboard
+
                 String studentId = (String) session.getAttribute("id");
                 List<Enroll> enrolls = enrollDao.getCourseList(studentId);
                 List<Course> courses = courseDao.getStudentCourses(enrolls);
@@ -82,17 +93,20 @@ public class Dashboard extends HttpServlet {
                 dispatcher.forward(request, response);
             }
         } else {
+            // User is not logged in, redirect to login page
+
             String url = "/coursehub";
             response.sendRedirect(url);
         }
 
-
     }
 
     /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
@@ -100,6 +114,7 @@ public class Dashboard extends HttpServlet {
         String courseCode = request.getParameter("courseCode");
         String studentId = (String) session.getAttribute("id");
         try {
+            // Enroll student in course
             EnrollDao enrollDao = new EnrollDao(mongo);
             CourseDao courseDao = new CourseDao(mongo);
             String courseId = courseDao.getCourseId(courseCode);
@@ -112,10 +127,12 @@ public class Dashboard extends HttpServlet {
                 String url = "/coursehub/dashboard?q=1";
                 response.sendRedirect(url);
             } else {
+                // Student is already enrolled in course or course does not exist
                 String url = "/coursehub/dashboard?q=2";
                 response.sendRedirect(url);
             }
         } catch (Exception e) {
+            // Student is already enrolled in course or course does not exist
             String url = "/coursehub/dashboard?q=2";
             response.sendRedirect(url);
         }
