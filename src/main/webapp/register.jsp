@@ -51,50 +51,20 @@
 
 <body class="bg-gray-100">
 <div class="relative" id="container">
-<nav id="header" class="fixed w-full z-30 top-0 text-white bg-gray-700">
-  <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
-    <div class="pl-4 flex items-center">
-      <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
-        <svg class="h-12 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-          <image href="./book.svg" x="0" y="0" width="100%" height="100%" />
-        </svg>
-        CourseHub
-      </a>
-    </div>
-    <div class="block lg:hidden pr-4">
-      <button id="nav-toggle" class="flex items-center p-1 text-pink-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-        <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <title>Menu</title>
-          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-        </svg>
-      </button>
-    </div>
-    <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
-      <ul class="list-reset lg:flex justify-end flex-1 items-center">
-        <li class="mr-3">
-        </li>
-      </ul>
-      <button
-              onclick="location.href='/coursehub/login'"
-              id="navAction"
-              class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-      >
-        Login
-      </button>
-    </div>
-  </div>
-  <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
-</nav>
-    <div class="min-h-screen flex justify-center items-center mt-1">
+    <div class="min-h-screen flex justify-center items-center">
         <div id="div1" class="absolute transition-opacity duration-500 ml-10">
             <form action="/coursehub/register" method="post">
-                <div class="py-12 px-12 bg-white rounded-2xl shadow-xl z-20 mt-2">
-                    <div>
+
+                <div class="py-12 px-12 bg-white rounded-2xl shadow-xl z-20">
+                    <div class=" flex flex-col justify-center item-center">
+                        <svg class="h-12 fill-current inline mb-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                            <image href="./owl.png" x="0" y="0" width="100%" height="100%" />
+                        </svg>
                         <h1 class="text-3xl font-bold text-center mb-4 cursor-pointer">Create a Student Account</h1>
                     </div>
                     <div class="space-y-4">
                         <div class="flex justify-center items-center">
-                            <button onclick="replaceDivs()" class="text-center py-2 w-64 text-sm text-black bg-gray-300 rounded-2xl">Register As a Teacher?</button>
+                            <button onclick="replaceDivs()" class="text-center py-2 w-64 text-sm text-black bg-gray-300 rounded-2xl">Are you a teacher?</button>
                         </div>
                         <input type="hidden" name="role" value="student">
                         <input type="text" name="username" placeholder="Registration No" class="block text-sm py-3 px-4 rounded-lg w-full border outline-none" required />
@@ -116,7 +86,7 @@
                         </div>
                     </div>
                     <div class="text-center mt-6">
-                        <button type="submit" class="py-3 w-64 text-xl text-white bg-red-500 rounded-2xl">Register</button>
+                        <button type="submit"  class="bg-red-900 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full h-9">Register</button>
                         <p class="mt-4 text-sm">Already Have An Account? <span class="underline cursor-pointer"> <a href="/coursehub/login">Log In </a></span>
                         </p>
                     </div>
@@ -137,7 +107,7 @@
                     </div>
                     <div class="space-y-4">
                         <div class="flex justify-center items-center">
-                            <button onclick="replaceDivs()" class="text-center py-2 w-64 text-sm text-black bg-gray-300 rounded-2xl mt-2">Register As a Student?</button>
+                            <button onclick="replaceDivs()" class="text-center py-2 w-64 text-sm text-black bg-gray-300 rounded-2xl mt-2">Are you a student?</button>
                         </div>
                         <input type="hidden" name="role" value="teacher">
                         <input type="text" name="username" placeholder="Username" class="block text-sm py-3 px-4 rounded-lg w-full border outline-none" required/>
@@ -159,7 +129,7 @@
                         </div>
                     </div>
                     <div class="text-center mt-6">
-                        <button onclick="replaceDivs()" class="py-3 w-64 text-xl text-white bg-red-800 rounded-2xl">Register</button>
+                        <button onclick="replaceDivs()" class="bg-red-900 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full h-9">Register</button>
                         <p class="mt-4 text-white text-sm">Already Have An Account? <span class="underline cursor-pointer"><a href="/coursehub/login">Log In</a></span>
                         </p>
                     </div>
@@ -169,16 +139,10 @@
     </div>
 
 </div>
-<footer class="bg-white mt-[-9rem]">
+<footer class="mt-[-9rem]">
   <div class="container mx-auto px-8">
     <div class="w-full flex flex-col md:flex-row py-6">
       <div class="flex-1 mb-6 text-black">
-        <a class="text-pink-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
-            <svg class="h-12 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-              <image href="./book.svg" x="0" y="0" width="100%" height="100%" />
-            </svg>
-            CourseHub
-        </a>
           <div class="container mx-auto text-center">
             <p>Copyright &#169; 2023 CourseHub</p>
           </div>
