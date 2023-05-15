@@ -31,7 +31,7 @@
 <nav id="header" class="fixed w-full z-30 top-0 text-white">
   <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
     <div class="pl-4 flex items-center">
-      <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
+      <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl">
         <svg class="h-12 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
           <image href="./owl.png" x="0" y="0" width="100%" height="100%" />
         </svg>
@@ -110,7 +110,7 @@
   <div class="container mx-auto px-8">
     <div class="w-full flex flex-col md:flex-row py-6">
       <div class="flex-1 mb-6 text-black">
-        <a class="text-pink-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl">
+        <a class="text-red-900 no-underline hover:no-underline font-bold text-2xl lg:text-4xl">
             <svg class="h-12 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
               <image href="./owl.png" x="0" y="0" width="100%" height="100%" />
             </svg>

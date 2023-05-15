@@ -72,7 +72,7 @@
                         <input type="email" name="email" placeholder="Email" class="block text-sm py-3 px-4 rounded-lg w-full border outline-none" required/>
                         <input type="password" name="password" placeholder="Password" class="block text-sm py-3 px-4 rounded-lg w-full border outline-none" required />
                         <div class="relative">
-                            <select name="dept" class="block appearance-none w-full py-3 px-4 pr-8 rounded-lg border outline-none text-gray-700 leading-tight focus:outline-none focus:border-blue-500">
+                            <select name="dept" class="block appearance-none w-full py-3 px-4 pr-8 rounded-lg border outline-none text-gray-700 leading-tight focus:outline-none focus:border-blue-500" required>
                                 <option value="" disabled selected>Select your department</option>
                                 <% for (String dept : (String[]) request.getAttribute("depts")) { %>
                                 <option value="<%= dept %>"><%= dept %></option>
@@ -87,8 +87,6 @@
                     </div>
                     <div class="text-center mt-6">
                         <button type="submit"  class="bg-red-900 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full h-9">Register</button>
-                        <p class="mt-4 text-sm">Already Have An Account? <span class="underline cursor-pointer"> <a href="/coursehub/login">Log In </a></span>
-                        </p>
                     </div>
 
                 </div>
@@ -102,7 +100,10 @@
             <form action="/coursehub/register" method="post">
 
                 <div class="py-12 px-12 rounded-2xl shadow-xl z-20 mt-2">
-                    <div>
+                    <div class=" flex flex-col justify-center item-center">
+                        <svg class="h-12 fill-current inline mb-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                            <image href="./owl.png" x="0" y="0" width="100%" height="100%" />
+                        </svg>
                         <h1 class="text-3xl font-bold text-center mb-4 cursor-pointer">Create a Teacher account</h1>
                     </div>
                     <div class="space-y-4">
@@ -130,8 +131,6 @@
                     </div>
                     <div class="text-center mt-6">
                         <button onclick="replaceDivs()" class="bg-red-900 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full h-9">Register</button>
-                        <p class="mt-4 text-white text-sm">Already Have An Account? <span class="underline cursor-pointer"><a href="/coursehub/login">Log In</a></span>
-                        </p>
                     </div>
                 </div>
             </form>
@@ -139,17 +138,6 @@
     </div>
 
 </div>
-<footer class="mt-[-9rem]">
-  <div class="container mx-auto px-8">
-    <div class="w-full flex flex-col md:flex-row py-6">
-      <div class="flex-1 mb-6 text-black">
-          <div class="container mx-auto text-center">
-            <p>Copyright &#169; 2023 CourseHub</p>
-          </div>
-      </div>
-    </div>
-  </div>
-</footer>
 
 </body>
 </html>

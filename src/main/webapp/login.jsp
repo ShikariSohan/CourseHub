@@ -23,7 +23,7 @@
         <p class="text-red-500">Invalid username or password</p>
         <% } %>
 
-        <label for="username" class="block text-gray-700 font-bold mb-2">Username</label>
+        <label for="username" class="block text-gray-700 font-bold mb-2">Username/Reg. no.</label>
         <input name="username" id="username" class="w-full border border-gray-300 p-2 rounded-lg" required>
       </div>
 
@@ -44,7 +44,7 @@
     </form>
   </div>
 </div>
-<footer class="bg-white mt-[-5rem]">
+<footer class="bg-gray-100 mt-[-5rem]">
   <div class="container mx-auto px-8">
     <div class="w-full flex flex-col md:flex-row py-6">
       <div class="flex-1 mb-6 text-black">
