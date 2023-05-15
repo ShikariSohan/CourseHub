@@ -104,7 +104,7 @@
                         <svg class="h-12 fill-current inline mb-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
                             <image href="./owl.png" x="0" y="0" width="100%" height="100%" />
                         </svg>
-                        <h1 class="text-3xl font-bold text-center mb-4 cursor-pointer">Create a Teacher account</h1>
+                        <h1 class="text-3xl font-bold text-center mb-4 cursor-pointer">Create a Teacher Account</h1>
                     </div>
                     <div class="space-y-4">
                         <div class="flex justify-center items-center">
