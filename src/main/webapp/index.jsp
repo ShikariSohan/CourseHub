@@ -33,7 +33,7 @@
     <div class="pl-4 flex items-center">
       <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
         <svg class="h-12 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-          <image href="./book.svg" x="0" y="0" width="100%" height="100%" />
+          <image href="./owl.png" x="0" y="0" width="100%" height="100%" />
         </svg>
         CourseHub
       </a>
@@ -110,9 +110,9 @@
   <div class="container mx-auto px-8">
     <div class="w-full flex flex-col md:flex-row py-6">
       <div class="flex-1 mb-6 text-black">
-        <a class="text-pink-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
+        <a class="text-pink-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl">
             <svg class="h-12 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-              <image href="./book.svg" x="0" y="0" width="100%" height="100%" />
+              <image href="./owl.png" x="0" y="0" width="100%" height="100%" />
             </svg>
             CourseHub
         </a>
