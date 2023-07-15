@@ -24,7 +24,7 @@ public class MongoDBContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         try {
             MongoClientURI uri = new MongoClientURI(
-                    "mongodb+srv://Owishiboo:wEFjeuNr9qgNZwOq@cluster0.1acta.mongodb.net/?retryWrites=true&w=majority");
+                    "YOUR MONGODB DB URL");
 
             MongoClient mongo = new MongoClient(uri);
 
